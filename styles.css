@@ -156,9 +156,32 @@ body {
 
 .section-media img {
     width: 100%;
+    max-width: 300px;
     height: auto;
     border-radius: 6px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section-media img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.content-section img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 15px 0;
+}
+
+.content-section img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .section-media iframe {
@@ -167,6 +190,78 @@ body {
     border-radius: 6px;
     border: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Lightbox Modal Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+.lightbox.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.lightbox-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    position: relative;
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.lightbox-content img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 8px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.2s ease;
+}
+
+.lightbox-close:hover {
+    color: #10b981;
 }
 
 /* Responsive Design */
@@ -215,6 +310,12 @@ body {
     .section-media {
         grid-template-columns: 1fr;
     }
+
+    .lightbox-close {
+        top: 10px;
+        right: 20px;
+        font-size: 30px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -247,6 +348,17 @@ body {
 
     .section-media iframe {
         height: 300px;
+    }
+
+    .section-media img,
+    .content-section img {
+        max-width: 100%;
+    }
+
+    .lightbox-close {
+        top: 10px;
+        right: 15px;
+        font-size: 25px;
     }
 }
 
