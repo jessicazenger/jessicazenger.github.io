@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img id="lightbox-img" src="" alt="Enlarged image">
+        </div>
+    </div>
+
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-content">
@@ -68,7 +76,7 @@
             <h2>Static Maps</h2>
             <div class="section-content">
                 <h3>Tranquility in Loch Lomond and The Trossachs National Park</h3>
-                <img src="Loch Lomond Weighted.jpg" Alt="Map of tranquil spots near Loch Lomond">
+                <img src="Loch Lomond Weighted.jpg" alt="Map of tranquil spots near Loch Lomond" onclick="openLightbox(this.src)">
                 <p>
                     Park authorities and other stakeholders are interested in the areas within the park that can be considered the most tranquil, but tranquility
                     is hard to define. A weighted overlay analysis, created through a pairwise comparison matrix of four variables (views of the lake, proximity
@@ -76,15 +84,15 @@
                 </p>
                 <br>
                 <h3>2021 Cumbre Vieja Volcanic Eruption</h3>
-                <img src="LPFalseColor.jpg" alt="Pseudocolor map of Cumbre Vieja lava flows">
-                <img src="LPAFC2.jpg" alt="False color map of Cumbre Vieja lava flows">
+                <img src="LPFalseColor.jpg" alt="Pseudocolor map of Cumbre Vieja lava flows" onclick="openLightbox(this.src)">
+                <img src="LPAFC2.jpg" alt="False color map of Cumbre Vieja lava flows" onclick="openLightbox(this.src)">
                 <p>
                     Pseudo color (first image) and false color (second image) maps of the 2021 Cumbre Vieja volcanic eruption lava flows on the island of La Palma. 
                     Images were created with IR and composite B-G-IR rasters, then a histogram stretch applied to show increased details of the island.
                 </p>
                 <br>
                 <h3>Baspra River Basin</h3>
-                <img src="Baspra.jpg" alt="Map of Baspra River Basin">
+                <img src="Baspra.jpg" alt="Map of Baspra River Basin" onclick="openLightbox(this.src)">
                 <p>
                     A map of the Baspra River Basin in the western Himalayas. Starting with a DEM, the data was cleaned, and the elevation and angles of each 
                     surface of the mountains calculated and stream runoff paths determined. Finally, a single pour-point was chosen at the mouth of the Baspra
@@ -98,5 +106,33 @@
         </section>
 
     </main>
+
+    <script>
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+
+        // Close lightbox when clicking outside the image
+        document.getElementById('lightbox').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
 </body>
 </html>
